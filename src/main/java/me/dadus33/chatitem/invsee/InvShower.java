@@ -32,10 +32,12 @@ public abstract class InvShower {
 	
 	protected final long time;
 	protected final UUID uuid;
+	protected final String name;
 	
-	public InvShower(Player cible) {
-		this.time = System.currentTimeMillis() + 3600 * 1000;
+	public InvShower(String id, Player cible) {
+		this.time = System.currentTimeMillis() + ChatItem.getInstance().getConfig().getInt("general.other-placeholders." + id + ".time-expire", 1800) * 1000;
 		this.uuid = cible.getUniqueId();
+		this.name = cible.getName();
 	}
 	
 	public UUID getUuid() {

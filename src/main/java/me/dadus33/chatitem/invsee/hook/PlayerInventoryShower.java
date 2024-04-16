@@ -17,11 +17,9 @@ public class PlayerInventoryShower extends InvShower {
 
 	private final HashMap<Integer, ItemStack> items = new HashMap<>();	
 	private final int level;
-	private final String name;
 	
 	public PlayerInventoryShower(Player cible) {
-		super(cible);
-		this.name = cible.getName();
+		super("inventory", cible);
 		this.level = cible.getLevel();
 		
 		PlayerInventory pi = cible.getInventory();

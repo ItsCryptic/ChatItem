@@ -13,12 +13,10 @@ import me.dadus33.chatitem.utils.Messages;
 public class EnderChestShower extends InvShower {
 
 	private final ItemStack[] items;
-	private final String name;
 	
 	public EnderChestShower(Player cible) {
-		super(cible);
-		this.name = cible.getName();
-
+		super("enderchest", cible);
+		
 		Inventory ec = cible.getEnderChest();
 		ItemStack[] tmp = ec.getContents();
 		items = new ItemStack[tmp.length];
