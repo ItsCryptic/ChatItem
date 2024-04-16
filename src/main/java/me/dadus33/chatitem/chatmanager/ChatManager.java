@@ -22,6 +22,9 @@ import me.dadus33.chatitem.ChatItem;
 import me.dadus33.chatitem.ItemSlot;
 import me.dadus33.chatitem.Storage;
 import me.dadus33.chatitem.hook.ecoenchants.EcoEnchantsSupport;
+import me.dadus33.chatitem.invsee.InvShower;
+import me.dadus33.chatitem.invsee.hook.EnderChestShower;
+import me.dadus33.chatitem.invsee.hook.PlayerInventoryShower;
 import me.dadus33.chatitem.itemnamer.NamerManager;
 import me.dadus33.chatitem.utils.ItemUtils;
 import me.dadus33.chatitem.utils.Utils;
@@ -131,7 +134,9 @@ public abstract class ChatManager {
 	
 	public static ChatAction getChatAction(ItemSlot slot, Player p) {
 		if(slot.isCommand()) {
-			return new ChatAction(slot, "/chatitem seeinv " + slot.name().toLowerCase() + " " + p.getUniqueId());
+			UUID uuid = UUID.randomUUID();
+			InvShower.add(uuid.toString(), slot == ItemSlot.INVENTORY ? new PlayerInventoryShower(p) : new EnderChestShower(p));
+			return new ChatAction(slot, "/chatitem seeinv " + uuid.toString());
 		}
 		return new ChatAction(slot, getUsableItem(p, slot));
 	}

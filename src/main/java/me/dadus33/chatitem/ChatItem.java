@@ -28,6 +28,7 @@ import me.dadus33.chatitem.commands.ChatItemCommand;
 import me.dadus33.chatitem.hook.ChatControlSupport;
 import me.dadus33.chatitem.hook.ChatManagerSupport;
 import me.dadus33.chatitem.hook.ecoenchants.EcoEnchantsSupport;
+import me.dadus33.chatitem.invsee.InvShower;
 import me.dadus33.chatitem.itemnamer.NamerManager;
 import me.dadus33.chatitem.listeners.InventoryListener;
 import me.dadus33.chatitem.listeners.JoinListener;
@@ -56,6 +57,7 @@ public class ChatItem extends JavaPlugin {
 		pl.storage = new Storage(pl.getConfig());
 		pl.chooseManagers();
 		Translation.load(pl);
+		InvShower.getInvShower().clear();
 		if(sender != null) {
 			if (!pl.storage.messageReload.isEmpty())
 				sender.sendMessage(pl.storage.messageReload);

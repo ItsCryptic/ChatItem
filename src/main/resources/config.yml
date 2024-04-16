@@ -259,6 +259,7 @@ messages:
   hours: " hours"
   enabled: "&aEnabled"
   disabled: "&cDisabled"
+  seeinv_not_found: "&cImpossible to find this inventory. Are you coming too late ?"
   inventory:
     name: "%cible%'s inventory"
     chat: "%cible%'s inventory"

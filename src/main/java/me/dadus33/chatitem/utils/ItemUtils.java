@@ -87,6 +87,10 @@ public class ItemUtils {
 		return stack;
 	}
 	
+	public static ItemStack copyIfExist(ItemStack item) {
+		return isEmpty(item) ? null : item.clone();
+	}
+	
 	public static boolean isEmpty(ItemStack item) {
 		return item == null || item.getType().equals(Material.AIR);
 	}
