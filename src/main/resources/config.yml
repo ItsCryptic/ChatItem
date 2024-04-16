@@ -62,7 +62,7 @@ general:
     inventory:
       enabled: true
       deny-if-no-item: true
-      # Time in minute before the placeholder expire
+      # Time in seconds before the placeholder expire
       time-expire: 1800
       keys:
       - "[inv]"
@@ -70,7 +70,7 @@ general:
     enderchest:
       enabled: true
       deny-if-no-item: true
-      # Time in minute before the placeholder expire
+      # Time in seconds before the placeholder expire
       time-expire: 1800
       keys:
       - "[ec]"
