@@ -1,6 +1,7 @@
 package me.dadus33.chatitem.chatmanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -9,9 +10,12 @@ import javax.annotation.Nullable;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import me.dadus33.chatitem.ChatItem;
@@ -21,6 +25,7 @@ import me.dadus33.chatitem.hook.ecoenchants.EcoEnchantsSupport;
 import me.dadus33.chatitem.itemnamer.NamerManager;
 import me.dadus33.chatitem.utils.ItemUtils;
 import me.dadus33.chatitem.utils.Utils;
+import me.dadus33.chatitem.utils.Version;
 
 public abstract class ChatManager {
 
@@ -103,6 +108,23 @@ public abstract class ChatManager {
 			return null;
 		if (EcoEnchantsSupport.hasSupport()) {
 			item = EcoEnchantsSupport.manageItem(item);
+		} else if (item.hasItemMeta()) {
+			ItemMeta meta = item.getItemMeta();
+			if (meta instanceof BookMeta) { // filtering written books
+				BookMeta bm = (BookMeta) item.getItemMeta();
+				bm.setPages(Collections.emptyList());
+				item.setItemMeta(bm);
+			} else if (meta instanceof BlockStateMeta && Version.getVersion().isNewerOrEquals(Version.V1_9)) { // if it's a block
+				BlockStateMeta bsm = (BlockStateMeta) item.getItemMeta();
+				if (bsm.hasBlockState() && bsm.getBlockState() instanceof ShulkerBox) {
+					ShulkerBox sb = (ShulkerBox) bsm.getBlockState();
+					for (ItemStack itemInv : sb.getInventory()) {
+						ItemUtils.stripData(itemInv);
+					}
+					bsm.setBlockState(sb);
+				}
+				item.setItemMeta(bsm);
+			}
 		}
 		return item;
 	}
