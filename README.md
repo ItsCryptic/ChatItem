@@ -10,7 +10,7 @@ You can:
 
 # Item doesn't show up well in chat
 
-You can do `/chatitem admin` then select a different item. It will change how the plugin tries to display items in chat.
+You can do `/chatitem admin` then select one of the other paper items in the menu. It will change how the plugin tries to display items in chat.
 
 **If you still have an issue, please do**:
 1) Do `/chatitem admin` then select on "Debug" item at top right
